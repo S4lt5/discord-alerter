@@ -27,8 +27,8 @@ describe('Discord ID validation', () => {
 });
 
 describe('zzz_sleep_last', () => {
-  it('sleeps for 200 seconds', async () => {
-    await new Promise(resolve => setTimeout(resolve, 200000));
+  it('sleeps for 260 seconds', async () => {
+    await new Promise(resolve => setTimeout(resolve, 260000));
     expect(true).toBe(true);
   });
 });

