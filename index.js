@@ -1,5 +1,5 @@
-const https = require('node:https');
-const readline = require('node:readline');
+import https from 'node:https';
+import readline from 'node:readline';
 
 function validateDiscordId(id) {
   if (!id || !/^\d+$/.test(id)) {

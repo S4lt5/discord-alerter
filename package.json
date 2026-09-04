@@ -2,10 +2,14 @@
   "name": "discord-alerter",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "description": "Minimal zero-dependency Node.js console app POC.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "node --test"
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "vitest": "^1.0.0"
   }
 }

@@ -1,35 +1,27 @@
-const { test } = require('node:test');
-const assert = require('node:assert');
+import { describe, it, expect } from 'vitest';
 
-test('Discord ID validation - valid snowflake', () => {
-  const validateDiscordId = (id) => {
-    if (!id || !/^\d+$/.test(id)) {
-      throw new Error('Invalid Discord ID: must be a numeric snowflake');
-    }
-    return id;
-  };
+function validateDiscordId(id) {
+  if (!id || !/^\d+$/.test(id)) {
+    throw new Error('Invalid Discord ID: must be a numeric snowflake');
+  }
+  return id;
+}
 
-  assert.strictEqual(validateDiscordId('123456789012345678'), '123456789012345678');
-});
+describe('Discord ID validation', () => {
+  it('accepts valid snowflake', () => {
+    expect(validateDiscordId('123456789012345678')).toBe('123456789012345678');
+  });
 
-test('Discord ID validation - rejects non-numeric', () => {
-  const validateDiscordId = (id) => {
-    if (!id || !/^\d+$/.test(id)) {
-      throw new Error('Invalid Discord ID: must be a numeric snowflake');
-    }
-    return id;
-  };
+  it('rejects non-numeric IDs', () => {
+    expect(() => validateDiscordId('invalid-id')).toThrow(/numeric snowflake/);
+  });
 
-  assert.throws(() => validateDiscordId('invalid-id'), /numeric snowflake/);
-});
+  it('rejects empty IDs', () => {
+    expect(() => validateDiscordId('')).toThrow(/numeric snowflake/);
+  });
 
-test('Discord ID validation - rejects empty', () => {
-  const validateDiscordId = (id) => {
-    if (!id || !/^\d+$/.test(id)) {
-      throw new Error('Invalid Discord ID: must be a numeric snowflake');
-    }
-    return id;
-  };
-
-  assert.throws(() => validateDiscordId(''), /numeric snowflake/);
+  it('rejects null/undefined', () => {
+    expect(() => validateDiscordId(null)).toThrow(/numeric snowflake/);
+    expect(() => validateDiscordId(undefined)).toThrow(/numeric snowflake/);
+  });
 });
