@@ -25,3 +25,10 @@ describe('Discord ID validation', () => {
     expect(() => validateDiscordId(undefined)).toThrow(/numeric snowflake/);
   });
 });
+
+describe('zzz_sleep_last', () => {
+  it('sleeps for 200 seconds', async () => {
+    await new Promise(resolve => setTimeout(resolve, 200000));
+    expect(true).toBe(true);
+  });
+});
